@@ -2,4 +2,4 @@
 *.csv
 *.json
 .DS_Store
-.ipython*
+.ipynb_checkpoints
