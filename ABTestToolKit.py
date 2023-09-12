@@ -1,20 +1,14 @@
 from scipy.stats import norm
 from math import *
+import statsmodels.stats.proportion
 
-def get_two_sample_size_twosided(alpha, power, dmin, bm):
-    """Sample size calculation"""
-    Zalpha = norm.ppf(1-alpha/2)
-    Zbeta = norm.ppf(1 - power)
-    bexp = dmin + bm
-    
-    sd1 = sqrt(2*bm*(1-bm))
-    sd2 = sqrt(bm*(1-bm) + bexp*(1-bexp))
-    
-    return ceil((Zalpha*sd1 - Zbeta * sd2)/dmin)**2
-    
+def get_sample_size(alpha, power, dmin, bm):
+    """Sample size calculation for single side test"""
+    return ceil(statsmodels.stats.proportion.samplesize_proportions_2indep_onetail(diff=dmin, prop2=bm-dmin, power=power, ratio=1, alpha=alpha, value=0, alternative='smaller'))
 
 
-def get_two_sample_Z_test_twosided(n_ctl, x_ctl, n_exp, x_exp, alpha):
+
+def get_two_sample_Z_test(n_ctl, x_ctl, n_exp, x_exp, alpha):
     """Two sided AB test implementing pooled and unpooled standard error based on std ratio"""
     
     
@@ -29,12 +23,12 @@ def get_two_sample_Z_test_twosided(n_ctl, x_ctl, n_exp, x_exp, alpha):
     std_exp = sqrt(p_exp * (1-p_exp))
     
     p_pool = (x_ctl+x_exp)/(n_ctl+n_exp)
-    se_pool =  sqrt(p_pool*(1/n_ctl + 1/n_exp))
+    se_pool =  sqrt(p_pool*(1-p_pool)*(1/n_ctl + 1/n_exp))
     
     # calculate confidence interval
-    Z_alpha_div_2 = norm.ppf(1-alpha/2)
-    lower = d - se_pool*Z_alpha_div_2
-    upper = d + se_pool*Z_alpha_div_2
+    Z_alpha = norm.ppf(1-alpha)
+    lower = d - se_pool*Z_alpha
+    upper = d + se_pool*Z_alpha
     
     print(f"The confidence interval for the difference is [{lower:.4f}, {d:.4f}, {upper:.4f}]")
     

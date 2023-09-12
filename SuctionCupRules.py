@@ -67,7 +67,7 @@ class MiniCupRule(BaseRule):
         self.name = 'MiniCupRule'
 
     def isEligible(self, item: Item):
-        return item.dim3 > 0.18 and item.dim1 < 5 and item.weight < 0.8
+        return item.dim2 >= 0.18 and item.dim2 < 5 and item.weight < 0.8
 
     def getConfig(self):
         return SuctionCup.swappable_vs_18_nr, GraspType.default
@@ -112,7 +112,7 @@ class SmallCupRule(BaseRule):
         self.name = 'SmallCupRule'
 
     def isEligible(self, item: Item):
-        return item.dim3 > 0.25 and item.dim1 < 5 and item.weight < 0.8
+        return item.dim2 >= 0.25 and item.dim2 < 5 and item.weight < 0.8
 
     def getConfig(self):
         return SuctionCup.swappable_vs_25_nr, GraspType.default
@@ -168,7 +168,7 @@ class MediumCupRule(BaseRule):
         self.name = 'MediumCupRule'
 
     def isEligible(self, item: Item):
-        return item.dim3 > 2 and item.dim1 < 1000 and item.weight < 1.9
+        return item.dim3 >= 2 and item.weight < 1.9
 
     def getConfig(self):
         return SuctionCup.swappable_b3_bgi34, GraspType.default
@@ -185,7 +185,7 @@ class LargeCupRule(BaseRule):
         self.name = 'LargeCupRule'
 
     def isEligible(self, item: Item):
-        return item.dim3 > 3 and item.dim1 < 1000 and item.weight < 6.6
+        return item.dim3 >= 3 and item.weight < 6.6
 
     def getConfig(self):
         return SuctionCup.swappable_vsa_63_nr, GraspType.default
@@ -241,7 +241,7 @@ class BagCupRule(BaseRule):
         self.name = 'BagCupRule'
 
     def isEligible(self, item: Item):
-        return item.dim3 > 1.9 and item.dim1 < 1000 and item.weight < 2.42
+        return item.dim2 >= 1.9 and item.weight < 2.42
 
     def getConfig(self):
         return SuctionCup.swappable_bgx_48, GraspType.default
