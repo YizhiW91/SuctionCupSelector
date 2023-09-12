@@ -4,7 +4,7 @@ The project is for recommending suction cups in piece picking automation process
 
 ## Table of Contents
 - [Summary](#summary)
-- [Run the app](#run the app)
+- [Install](#install)
 - [Features](#features)
 - [License](#license)
 
@@ -31,7 +31,7 @@ The project contains data analysis and the webpage for user to access the tools.
 </p>
 
 
-## Run the app
+## Install
 
 ### Install the Python Dependency
 
@@ -47,13 +47,17 @@ To run the webpage locally, please run:
 streamlit run Suction_Cup_Configuration.py
 ```
 
-### Docker
+## Features
 
-Alternatively, with Docker, use the following command and then navigate to localhost.
+Besides the analysis, the webpage provides 3 utilities.
 
-```
-docker run -dp 80:8080 ryanfox212/samplesize
-```
+* Suction Cup Initializer
+   * Given item dimensions, the tool will spit out the compatible suction cup and grasp type for the item.
+* AB Test Sample Size Calculator
+   * Given alpha, power, MDE, the calculator can provide the needed sample size per variant under the one-side test assumption.
+* AB Test Analyzer
+   * Given the sample size and the proportion of control and experiment group, the analyzer can run the test to see if the result is significant or not.
+ 
 
 ## License
 
